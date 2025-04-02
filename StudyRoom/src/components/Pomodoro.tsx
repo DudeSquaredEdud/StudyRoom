@@ -92,7 +92,7 @@ function Pomodoro({ startTime = 1500, breakTime = 300, longBreakTime = 900 }) {
   const rotateSteps = (e: MouseEvent | null, step: number | null | "next") => {
     if (step !== undefined && step !== null) {
       if (step == "next") {
-        setCurrentStep((prev) => (prev + 1) % 6);
+        setCurrentStep((currentStep + 1) % 6);
       }
     }
 
@@ -114,10 +114,10 @@ function Pomodoro({ startTime = 1500, breakTime = 300, longBreakTime = 900 }) {
       if (!newPaused) {
         intervalRef.current = setInterval(() => {
           setTimer((prevTimer) => {
-            if (prevTimer == 0) {
+            if (prevTimer == 1) {
+              alert();
               // Time's up - rotate steps and pause
               rotateSteps(null, "next");
-              alert();
               return 0;
             }
             return prevTimer - 1;
